@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TodoList</title>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Reddit+Mono:wght@200..900&display=swap');
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="inner">
+      <h1 class="todo_title">Todo List</h1>
+      <form class="todo_form" id="myForm">
+        <label for="add_todo">
+          <input id="add_todo" class="todo_input" type="text" placeholder="오늘 할 일을 적어주세요.">
+        </label>
+        <button type="submit" class="add_todo_btn">추가</button>
+      </form>
+
+      <div class="list_wrap">
+        <h1 class="list_wrap__title">할 일 목록</h1>
+        <div class="divider_line"></div>
+        <ul id="list_container">
+          <li class="todo">자바스크립트</li>
+          <li class="todo">리액트</li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
