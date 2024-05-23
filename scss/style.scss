@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /* box-sizing 규칙을 명시합니다. */
 *,
 *::before,
@@ -30,8 +29,8 @@ dd {
 }
 
 /* list를 role값으로 갖는 ul, ol 요소의 기본 목록 스타일을 제거합니다. */
-ul[role=list],
-ol[role=list] {
+ul[role="list"],
+ol[role="list"] {
   list-style: none;
 }
 
@@ -110,86 +109,101 @@ textarea:not([rows]) {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.inner .todo_title {
-  margin-bottom: 30px;
-  font-size: 28px;
+
+  .todo_title {
+    margin-bottom: 30px;
+    font-size: 28px;
+  }
 }
 
 .todo_form {
   margin-bottom: 40px;
-}
-.todo_form #add_todo,
-.todo_form .add_todo_btn {
-  border: 1px solid gray;
-  border-radius: 8px;
-}
-.todo_form #add_todo {
-  padding: 6px 12px;
-  margin-right: 4px;
-}
-.todo_form .add_todo_btn {
-  padding: 4px 12px;
-  transition-duration: 0.3s;
-  cursor: pointer;
-}
-.todo_form .add_todo_btn:hover {
-  background-color: #000;
-  color: #f2f2f2;
+
+  #add_todo,
+  .add_todo_btn {
+    border: 1px solid gray;
+    border-radius: 8px;
+  }
+
+  #add_todo {
+    padding: 6px 12px;
+    margin-right: 4px;
+  }
+
+  .add_todo_btn {
+    padding: 4px 12px;
+    transition-duration: 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #000;
+      color: #f2f2f2;
+    }
+  }
 }
 
 .list_wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   min-width: 440px;
   min-height: 500px;
   height: 100%;
+
   border: 1px solid gray;
   border-radius: 8px;
+
+  .list_wrap__title {
+    margin: 20px 0;
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  .divider_line {
+    max-width: 400px;
+    width: 100%;
+    height: 1px;
+    background-color: gray;
+  }
+
+  #list_container {
+    padding: 20px;
+    .todo.checked {
+      text-decoration: line-through;
+      text-decoration-color: red;
+    }
+
+    .todo {
+      display: flex;
+      justify-content: space-between;
+      width: 360px;
+      margin-bottom: 8px;
+      padding: 6px 8px;
+
+      color: #f2f2f2;
+      background-color: rgba(0, 0, 0, 0.8);
+
+      border-radius: 8px;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        transition-duration: 0.3s;
+        &:hover {
+          cursor: pointer;
+          background: pink;
+          color: black;
+        }
+      }
+    }
+  }
 }
-.list_wrap .list_wrap__title {
-  margin: 20px 0;
-  font-size: 24px;
-  font-weight: 500;
-}
-.list_wrap .divider_line {
-  max-width: 400px;
-  width: 100%;
-  height: 1px;
-  background-color: gray;
-}
-.list_wrap #list_container {
-  padding: 20px;
-}
-.list_wrap #list_container .todo.checked {
-  text-decoration: line-through;
-  text-decoration-color: red;
-}
-.list_wrap #list_container .todo {
-  display: flex;
-  justify-content: space-between;
-  width: 360px;
-  margin-bottom: 8px;
-  padding: 6px 8px;
-  color: #f2f2f2;
-  background-color: rgba(0, 0, 0, 0.8);
-  border-radius: 8px;
-}
-.list_wrap #list_container .todo:hover {
-  cursor: pointer;
-}
-.list_wrap #list_container .todo span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  transition-duration: 0.3s;
-}
-.list_wrap #list_container .todo span:hover {
-  cursor: pointer;
-  background: pink;
-  color: black;
-}/*# sourceMappingURL=style.css.map */
