@@ -22,7 +22,7 @@ const addTask = (e) => {
   saveTodo();
 };
 
-myForm.addEventListener("submit", addTask);
+// myForm.addEventListener("submit", addTask);
 
 listContainer.addEventListener("click", (e) => {
   // console.log("e : ", e.target.tagName);
@@ -47,4 +47,4 @@ const showTodoList = () => {
   listContainer.innerHTML = localStorage.getItem("todo");
 };
 
-showTodoList();
+// showTodoList();
