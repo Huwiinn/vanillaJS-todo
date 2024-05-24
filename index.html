@@ -8,13 +8,9 @@
   <title>TodoList</title>
   <link rel="stylesheet" href="/css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Reddit+Mono:wght@200..900&display=swap');
   </style>
-
-
 </head>
 
 <body>
@@ -35,67 +31,92 @@
       </div>
     </div>
   </div>
-
-  <script>
-    const supabaseUrl = 'https://kjjlmfateoqhwftmotbb.supabase.co'
-    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqamxtZmF0ZW9xaHdmdG1vdGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTY0Nzc0NTEsImV4cCI6MjAzMjA1MzQ1MX0.BYLqlNIaBAMSsFUMpOWnt5Ck6HXGT_0U13DA_NEYJLg"
-    const client = supabase.createClient(supabaseUrl, supabaseKey)
-
-
-    async function refreshTodoList() {
-      let { data: todoList, error } = await client.from('todoList').select('*')
-      const listContainer = document.querySelector('#list_container');
-      console.log("todoList : ", todoList)
-
-      const renderTodo = () => {
-        // 기존 배열 초기화
-        listContainer.innerHTML = "";
-
-        // 배열 업데이트
-        todoList.forEach(todo => {
-          let li = document.createElement("li");
-          li.classList.add('todo');
-          li.innerHTML = todo.title;
-          listContainer.appendChild(li);
-          let span = document.createElement("span");
-          span.innerHTML = "\u00d7";
-          li.appendChild(span);
-        })
-      }
-
-      renderTodo();
-
-      // console.log("todo : ", todo)
-    }
-
-    refreshTodoList();
-
-    async function addTodoTask(e) {
-      e.preventDefault();
-      const todoInput = document.querySelector(".todo_input");
-
-      if (todoInput.value === "") {
-        return alert("할 일을 작성해주세요.")
-      }
-
-      const { data: todoList, error } = await client
-        .from('todoList')
-        .insert([
-          { title: todoInput.value },
-        ])
-
-      refreshTodoList();
-    }
-
-    document.querySelector(".add_todo_btn").addEventListener("click", addTodoTask);
-
-
-
-  </script>
-  <script src="script.js"></script>
 </body>
+
+<script>
+  // js supabase client set
+  const supabaseUrl = 'https://kjjlmfateoqhwftmotbb.supabase.co'
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqamxtZmF0ZW9xaHdmdG1vdGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTY0Nzc0NTEsImV4cCI6MjAzMjA1MzQ1MX0.BYLqlNIaBAMSsFUMpOWnt5Ck6HXGT_0U13DA_NEYJLg"
+  const client = supabase.createClient(supabaseUrl, supabaseKey)
+
+
+
+  // TodoList를 업데이트하는 함수
+  async function refreshTodoList() {
+    let { data: todoList, error } = await client.from('todoList').select('*')
+    const listContainer = document.querySelector('#list_container');
+    console.log("todoList : ", todoList)
+
+
+    const renderTodo = () => {
+      // 기존 배열 초기화
+      listContainer.innerHTML = "";
+
+      // 배열 업데이트
+      todoList.forEach(todo => {
+        let li = document.createElement("li");
+        li.classList.add('todo');
+        li.innerHTML = todo.title;
+        listContainer.appendChild(li);
+
+        let span = document.createElement("span");
+        span.classList.add('closeBtn');
+        span.innerHTML = "\u00d7";
+
+        // 삭제 버튼 이벤트 함수 추가
+        console.log("todo : ", todo)
+        span.addEventListener("click", () => removeTodo(todo.id));
+        li.appendChild(span);
+      })
+    }
+
+    renderTodo();
+  }
+
+  refreshTodoList();
+
+  // Todo를 추가하는 함수
+  async function addTodoTask(e) {
+    e.preventDefault();
+    const todoInput = document.querySelector(".todo_input");
+
+    if (todoInput.value === "") {
+      return alert("할 일을 작성해주세요.")
+    }
+
+    // db에 데이터 추가
+    const { data: todoList, error } = await client
+      .from('todoList')
+      .insert([
+        { title: todoInput.value },
+      ])
+
+    todoInput.value = "";
+
+    await refreshTodoList();
+  }
+
+  document.querySelector(".add_todo_btn").addEventListener("click", addTodoTask);
+
+  // Todo 삭제 함수
+  async function removeTodo(id) {
+    console.log("removeTodo--------------")
+
+    const { error } = await client
+      .from('todoList')
+      .delete()
+      .eq("id", id)
+
+    await refreshTodoList();
+  }
+
+
+</script>
 
 </html>
 
 <!-- 인풋에 입력한 todo를 데이터베이스에 저장할 것 ✅ -->
 <!-- todo를 추가하면 추가한 값만 붙어야 할 것. 현재는 모든 todo들이 한 번 더 불러오고 아래에 붙는중 ✅ => 배열을 초기화하고 새로운 배열을 만드는 방식으로 해결-->
+<!-- 삭제 기능 구현할 것 ✅ -->
+<!-- 수정 기능 구현할 것 -->
+<!-- 로그인 인증 기능 구현할 것 -->
