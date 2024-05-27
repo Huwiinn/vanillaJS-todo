@@ -18,6 +18,12 @@
 <body>
   <div class="container">
     <div class="inner">
+
+      <input type="button" value="Login" id="login" />
+      <input type="button" value="Logout" id="logout" />
+      <input type="button" value="create" id="create_btn" />
+
+
       <h1 class="todo_title">Todo List</h1>
       <form class="todo_form" id="myForm">
         <label for="add_todo">
@@ -29,10 +35,13 @@
       <div class="list_wrap">
         <h1 class="list_wrap__title">할 일 목록</h1>
         <div class="divider_line"></div>
-        <ul id="list_container"></ul>
+        <ul id="list_container">
+        </ul>
       </div>
     </div>
   </div>
+
+  <div id="history"></div>
 </body>
 
 <script src="script.js"></script>

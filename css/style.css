@@ -166,6 +166,12 @@ textarea:not([rows]) {
   text-decoration: line-through;
   text-decoration-color: red;
 }
+.list_wrap #list_container li .icon_wrap {
+  display: flex;
+}
+.list_wrap #list_container li .icon_wrap .todoEdit:hover {
+  background-color: #f2f2f2;
+}
 .list_wrap #list_container .todo {
   display: flex;
   justify-content: space-between;
